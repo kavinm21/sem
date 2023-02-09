@@ -14,9 +14,10 @@ def static_ranking(n,m):
     offline_ranks=sorted(ranks_avg,key=lambda l:l[0], reverse=True) 
     return extract_elements(offline_ranks,1)
 
-def MAB(offline_ranking):
+def MAB(offline_ranking, eps, delta, k):
     item_pref=[]
-    for j in range(10):
+    x = int((2*k**2/eps**2)*math.log(2*k/delta))
+    for j in range(x):
       item_pref.append(random.choice(offline_ranking))
     return collections.Counter(item_pref)
 
@@ -30,11 +31,13 @@ if __name__ == "__main__":
     offline_ranking=static_ranking(n,m)
     presentation_ranking={}
     k=int(input('Enter the value of k:'))
+    eps = float(input('Enter value of epsilon:'))
+    delta = float(input('Enter value of delta:'))
     for i in range(len(offline_ranking[0:k])):
       if(i==0):
         for val in offline_ranking[0:k]:
           presentation_ranking[val]=0
-      dup=MAB(offline_ranking[0:k])
+      dup=MAB(offline_ranking[0:k], eps, delta, k)
       for j in offline_ranking[0:k]:
         try:
           presentation_ranking[j]+=dup[j]
@@ -42,3 +45,4 @@ if __name__ == "__main__":
           presentation_ranking[j]=presentation_ranking[j]
     print('Offline ranking of items:',offline_ranking)
     final_ranking(presentation_ranking)
+    
