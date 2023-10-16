@@ -1,0 +1,7 @@
+www.youtube.com ## +js(set, yt.config_.openPopupConfig.supportedPopups.adBlockMessageViewModel, false)
+
+www.youtube.com ## +js(set, Object.prototype.adBlocksFound, 0)
+
+www.youtube.com ## +js(set, ytplayer.config.args.raw_player_response.adPlacements, [])
+
+www.youtube.com ## +js(set, Object.prototype.hasAllowedInstreamAd, true)
